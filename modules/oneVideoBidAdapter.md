@@ -15,6 +15,7 @@ Connects to Verizon Media's Video SSP (AKA ONE Video / Adap.tv) demand source to
   var adUnits = [
     {
         code: 'video1',
+        hi
           mediaTypes: {
             video: {
                   context: 'instream',
