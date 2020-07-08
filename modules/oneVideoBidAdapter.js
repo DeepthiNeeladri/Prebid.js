@@ -5,9 +5,8 @@ export const spec = {
   code: 'oneVideo',
   VERSION: '3.0.3',
   ENDPOINT: 'https://ads.adaptv.advertising.com/rtb/openrtb?ext_id=',
-  SYNC_ENDPOINT1: 'https://cm.g.doubleclick.net/pixel?google_nid=adaptv_dbm&google_cm&google_sc',
-  SYNC_ENDPOINT2: 'https://pr-bh.ybp.yahoo.com/sync/adaptv_ortb/{combo_uid}',
-  SYNC_ENDPOINT3: 'https://match.adsrvr.org/track/cmf/generic?ttd_pid=adaptv&ttd_tpi=1',
+  SYNC_ENDPOINT1: 'https://pr-bh.ybp.yahoo.com/sync/adaptv_ortb/{combo_uid}',
+  SYNC_ENDPOINT2: 'https://match.adsrvr.org/track/cmf/generic?ttd_pid=adaptv&ttd_tpi=1',
   supportedMediaTypes: ['video', 'banner'],
   /**
    * Determines whether or not the given bid request is valid.
@@ -130,15 +129,11 @@ export const spec = {
       },
       {
         type: 'image',
-        url: spec.SYNC_ENDPOINT2
-      },
-      {
-        type: 'image',
         url: `https://sync-tm.everesttech.net/upi/pid/m7y5t93k?gdpr=${gdprApplies ? 1 : 0}&gdpr_consent=${consentString}&redir=https%3A%2F%2Fpixel.advertising.com%2Fups%2F55986%2Fsync%3Fuid%3D%24%7BUSER_ID%7D%26_origin%3D0` + encodeURI(`&gdpr=${gdprApplies ? 1 : 0}&gdpr_consent=${consentString}`)
       },
       {
         type: 'image',
-        url: spec.SYNC_ENDPOINT3
+        url: spec.SYNC_ENDPOINT2
       }];
     }
   }
@@ -240,16 +235,8 @@ function getRequestData(bid, consentData, bidRequest) {
       bidData.imp[0].banner.ext.minduration = bid.params.video.minduration
     }
   }
-<<<<<<< HEAD
-  if (bid.params.video.rewarded) {
-    bidData.imp[0].ext.rewarded = bid.params.video.rewarded
-  }
-  if (bid.params.site && bid.params.site.id) {
-    bidData.site.id = bid.params.site.id
-=======
   if (bid.params.video.inventoryid) {
     bidData.imp[0].ext.inventoryid = bid.params.video.inventoryid
->>>>>>> ae6b818b3e8a99420ce22641e51b2163ac485128
   }
   if (bid.params.video.sid) {
     bidData.source = {

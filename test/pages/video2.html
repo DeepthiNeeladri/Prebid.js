@@ -1,0 +1,123 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video SSP Header Bidding Renderer Solution</title>
+
+      <script src="../../build/dev/prebid.js" async=true></script>
+
+    <script>
+        var pbjs = pbjs || {};
+        pbjs.que = pbjs.que || [];
+        //pbjs.setConfig({ useBidCache: true });
+
+        let PREBID_TIMEOUT = 1000;
+
+        const videoAdUnits = [{
+            code: 'video1',
+            mediaTypes: {
+                banner: {
+                    context: 'instream',
+                    playerSize: [640, 480]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'oneVideo',
+                    params: {
+                        video: {
+                            playerWidth: 640,
+                            playerHeight: 480,
+                            mimes: ['video/mp4', 'application/javascript'],
+                            protocols: [2, 5],
+                            api: [1],
+                            display: 1,
+
+                        },
+                        site: {
+                          page: 'http://www.vidible.tv',
+                          ref: 'http://www.vidible.tv'
+                        },
+                        pubId: 'OneMDisplay'
+                    }
+                }
+            ]
+        }];
+
+    pbjs.que.push(function() {
+        pbjs.addAdUnits(videoAdUnits)
+        pbjs.requestBids({
+            timeout: PREBID_TIMEOUT,
+            bidsBackHandler: function(bids) {
+                let highestCpmBids = pbjs.getHighestCpmBids('video1');
+                if (highestCpmBids[0]) {
+                    console.log('%c +++++ The vastUrl value below is set to the nurl win-notification which is an ad-attempt pixel', 'color:blue');
+                    console.log(highestCpmBids[0].vastUrl, highestCpmBids[0])
+                    console.log('%c +++++ pbjs.renderAd will fail as the it will try to load ad-attempt pixel instead of vast', 'color:blue');
+                    pbjs.renderAd(document, highestCpmBids[0].adId);
+                } else {
+                    console.error('HBExchange Error: Make sure you are testing in US west coast otherwise the test creative will not respond');
+                }
+            }
+            })
+        });
+    </script>
+
+
+
+</head>
+
+<body>
+    <h1>Header Bidding Outstream Renderer Playback out of view</h1>
+    <!--Outstream adUnit for auction -->
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p>go down...</p>
+    <p><b>outstrem div below</b></p>
+    <div id="video1"style="border: 3px solid grey; width: 500px"></div>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+    <p>look up</p>
+
+
+
+</body>
+
+</html>
+<script>
