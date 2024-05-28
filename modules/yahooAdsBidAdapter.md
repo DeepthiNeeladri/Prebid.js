@@ -581,6 +581,7 @@ Currently the bidOverride object only accepts the following:
     * pos
     * playbackmethod
     * placement
+    * plcmt
     * linearity
     * protocols
     * rewarded
@@ -620,6 +621,7 @@ const adUnits = [{
                         playbackmethod: 0,
                         placement: 1,
                         linearity: 1,
+                        plcmt: 1,
                         protocols: [2,5],
                         startdelay: 0,
                         rewarded: 0
